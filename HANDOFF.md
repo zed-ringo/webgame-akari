@@ -10,6 +10,7 @@ Static Light Up / Akari-style logic puzzle.
 - Public URL: `https://webgame.beta.menu/akari/`
 - Worker name: `webgame-akari`
 - Route: `webgame.beta.menu/akari/*`
+- Latest deployed version: `2aa9bd04-39e2-41bb-b41d-dd59abb9b561`
 
 ## Files
 
