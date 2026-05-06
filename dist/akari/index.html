@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Akari Lanterns</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="app" aria-labelledby="game-title">
+      <section class="hud" aria-label="ゲーム情報">
+        <div class="hud-top">
+          <div class="brand">
+            <span class="mark" aria-hidden="true"></span>
+            <div>
+              <h1 id="game-title">Akari Lanterns</h1>
+              <p>Light every corridor</p>
+            </div>
+          </div>
+          <div class="setup-controls" role="group" aria-label="問題">
+            <div class="segmented" role="group" aria-label="難易度">
+              <button type="button" data-puzzle="easy" aria-pressed="true">Easy</button>
+              <button type="button" data-puzzle="normal">Normal</button>
+              <button type="button" data-puzzle="hard">Hard</button>
+            </div>
+            <button id="new-game" class="icon-button power-button" type="button" aria-label="リセット" title="リセット">
+              <span aria-hidden="true">⏻</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="hud-bottom">
+          <div class="meters" aria-live="polite">
+            <div class="meter">
+              <span>LIT</span>
+              <strong id="lit-count">000</strong>
+            </div>
+            <div class="meter">
+              <span>LAMP</span>
+              <strong id="lamp-count">000</strong>
+            </div>
+            <div class="meter">
+              <span>ERROR</span>
+              <strong id="error-count">000</strong>
+            </div>
+          </div>
+          <div class="play-controls" role="group" aria-label="ゲーム中の操作">
+            <button id="hint" class="icon-button" type="button" aria-label="ヒント" title="ヒント">
+              <span aria-hidden="true">?</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="stage-wrap" aria-label="Akari 盤面">
+        <div class="status-line">
+          <span id="message">白マスをすべて照らしましょう</span>
+          <span class="hint">タップでランプ / もう一度タップで消す</span>
+        </div>
+        <div class="scene" id="scene">
+          <canvas id="spark-canvas" aria-hidden="true"></canvas>
+          <div id="board" class="board" role="grid" aria-label="Akari Lanterns"></div>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="result-dialog">
+      <form method="dialog" class="dialog-body">
+        <span id="result-kicker">CLEAR</span>
+        <h2 id="result-title">全て点灯</h2>
+        <p id="result-copy"></p>
+        <menu>
+          <button value="close">盤面を見る</button>
+          <button value="restart" class="primary">次の盤面</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="app.js"></script>
+  </body>
+</html>
