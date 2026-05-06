@@ -384,7 +384,8 @@ function animateParticles() {
     particle.x += particle.vx;
     particle.y += particle.vy;
     particle.vy += 0.04;
-    const alpha = 1 - particle.age / particle.life;
+    const alpha = Math.max(0, 1 - particle.age / particle.life);
+    if (alpha <= 0) return;
     ctx.globalAlpha = alpha;
     ctx.fillStyle = particle.color;
     ctx.beginPath();
