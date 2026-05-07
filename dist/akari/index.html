@@ -14,7 +14,7 @@
             <span class="mark" aria-hidden="true"></span>
             <div>
               <h1 id="game-title">Akari Lanterns</h1>
-              <p>Light every corridor</p>
+              <p>数字黒マスの条件を守って照らす</p>
             </div>
           </div>
           <div class="setup-controls" role="group" aria-label="問題">
@@ -54,8 +54,8 @@
 
       <section class="stage-wrap" aria-label="Akari 盤面">
         <div class="status-line">
-          <span id="message">白マスをすべて照らしましょう</span>
-          <span class="hint">タップでランプ / もう一度タップで消す</span>
+          <span id="message">白マスをすべて照らし、数字の隣接ランプ数を合わせましょう</span>
+          <span class="hint">数字は上下左右のランプ数</span>
         </div>
         <div class="scene" id="scene">
           <canvas id="spark-canvas" aria-hidden="true"></canvas>
@@ -76,6 +76,6 @@
       </form>
     </dialog>
 
-    <script src="app.js"></script>
+    <script src="app.js"></script><script src="rules.js"></script>
   </body>
 </html>

@@ -1,33 +1,34 @@
 const PUZZLES = {
   easy: [
-    "...#...",
+    "...2...",
     ".......",
-    "#......",
+    "1......",
     ".......",
-    ".......",
+    "....0..",
     ".......",
     ".......",
   ],
   normal: [
-    "....#...",
+    "....2...",
     "........",
+    "..1.....",
     "........",
-    "....#...",
+    "....0...",
     "........",
-    "........",
-    "....#...",
+    "......3.",
+    "....1...",
     "........",
   ],
   hard: [
-    "...#.....",
+    "...2.....",
     ".........",
-    "#........",
+    "1........",
     ".........",
+    "....0....",
     ".........",
+    "......3..",
     ".........",
-    ".........",
-    ".........",
-    ".........",
+    "..2......",
   ],
 };
 
@@ -58,7 +59,6 @@ function createState(puzzle = "easy") {
     cols: grid[0].length,
     grid,
     lamps: new Set(),
-    suggested: null,
     ended: false,
   };
 }
@@ -223,7 +223,6 @@ function renderBoard() {
       } else {
         cell.classList.toggle("lit", current.lit.has(cellKey));
         cell.classList.toggle("lamp", state.lamps.has(cellKey));
-        cell.classList.toggle("suggested", state.suggested === cellKey);
       }
       cell.classList.toggle("error", current.conflicts.has(cellKey) || current.numberErrors.has(cellKey));
       boardEl.append(cell);
@@ -235,7 +234,6 @@ function renderBoard() {
 function toggleLamp(row, col) {
   if (state.ended || isWall(row, col)) return;
   const cellKey = key(row, col);
-  state.suggested = null;
   if (state.lamps.has(cellKey)) {
     state.lamps.delete(cellKey);
   } else {
@@ -252,24 +250,8 @@ function toggleLamp(row, col) {
     if (typeof dialog.showModal === "function") dialog.showModal();
   } else {
     const current = stats();
-    messageEl.textContent = current.errors ? "赤い場所の条件を直しましょう" : "白マスをすべて照らしましょう";
+    messageEl.textContent = current.errors ? "赤い数字やランプの条件を直しましょう" : "白マスと数字条件を確認しましょう";
   }
-}
-
-function showHint() {
-  const current = stats();
-  for (let row = 0; row < state.rows; row += 1) {
-    for (let col = 0; col < state.cols; col += 1) {
-      const cellKey = key(row, col);
-      if (!isWall(row, col) && !current.lit.has(cellKey)) {
-        state.suggested = cellKey;
-        renderBoard();
-        messageEl.textContent = "光っていないマスの周辺を考えましょう";
-        return;
-      }
-    }
-  }
-  messageEl.textContent = "数字条件とランプ同士の見通しを確認しましょう";
 }
 
 function saveRecord(puzzle, lamps) {
@@ -288,7 +270,7 @@ function startGame(puzzle = state?.puzzle || "easy") {
   state = createState(puzzle);
   renderBoard();
   updateHud();
-  messageEl.textContent = "白マスをすべて照らしましょう";
+  messageEl.textContent = "白マスを照らし、数字黒マスの上下左右ランプ数を合わせましょう";
   document.querySelectorAll("[data-puzzle]").forEach((button) => {
     button.setAttribute("aria-pressed", String(button.dataset.puzzle === puzzle));
   });
@@ -301,7 +283,6 @@ boardEl.addEventListener("click", (event) => {
 });
 
 document.querySelector("#new-game").addEventListener("click", () => startGame());
-document.querySelector("#hint").addEventListener("click", showHint);
 document.querySelectorAll("[data-puzzle]").forEach((button) => {
   button.addEventListener("click", () => startGame(button.dataset.puzzle));
 });

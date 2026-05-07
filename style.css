@@ -282,9 +282,16 @@ h1 {
     linear-gradient(145deg, rgba(255, 255, 255, 0.06), transparent 34%),
     var(--wall);
   color: #f6f8fb;
+  text-shadow: 0 0 14px rgba(255, 212, 94, 0.35);
   box-shadow:
     0 7px 0 #05070a,
     inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+.cell-button.wall:not(:empty) {
+  color: var(--accent);
+  font-size: calc(var(--cell-size) * 0.48);
+  border: 1px solid rgba(255, 212, 94, 0.24);
 }
 
 .cell-button.lit {

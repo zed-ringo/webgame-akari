@@ -6,7 +6,7 @@ Last updated: 2026-05-06
 
 Static Light Up / Akari-style logic puzzle.
 
-- Local workspace: `/Volumes/work-ringo/2605-MineSweeper/akari`
+- Local workspace: `/Volumes/work-ringo/2605-webgame/akari`
 - Public URL: `https://webgame.beta.menu/akari/`
 - Worker name: `webgame-akari`
 - Route: `webgame.beta.menu/akari/*`
